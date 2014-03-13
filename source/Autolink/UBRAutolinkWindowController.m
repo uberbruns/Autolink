@@ -146,6 +146,14 @@
 
 
 
+- (IBAction)openHelp:(id)sender {
+
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/uberbruns/Autolink#usage"]];
+
+}
+
+
+
 - (void)syncSourceFolder:(NSURL *)currentSourceFolder withTargetFolder:(NSURL *)currentTargetFolder {
     
     NSFileManager * fm = [NSFileManager defaultManager];
