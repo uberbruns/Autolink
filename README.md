@@ -1,7 +1,7 @@
 Autolink (Experimental Alpha)
 =============================
 
-An OS X Utility App to selectively mirror a file structure via symlinks and folders to another location - for example into your Dropbox. Selective synching is controlled via hidden files.
+An OS X Utility App to selectively mirror a file structure via symlinks and folders to another location - for example into your Dropbox. Selective syncing is controlled via hidden files.
 
 ![Screenshot](misc/screenshot.png)
 
