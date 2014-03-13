@@ -3,7 +3,7 @@ Autolink
 
 An OS X Utility App to selectively mirror a file structure into another location - for example into your Dropbox. Selective synching is controlled via hidden files.
 
-![Screenshot](screenshot.png)
+![Screenshot](misc/screenshot.png)
 
 ## Usage
 
@@ -13,4 +13,4 @@ If you choose to create a folder all direct subfolders will be scanned for hidde
 
 Here is an example of a project directory that is synched to a dropbox excluding the folder "Internal"
 
-![Help](help.png)
+![Help](misc/help.png)
