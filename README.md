@@ -13,6 +13,8 @@ Why mirroring folders? You use folders to give the target folder more structure,
 
 If you choose to create a folder all direct subfolders will be scanned for hidden files so those subfolders can end up in the target folder as symlinks or folders to.
 
-Here is an example of a project directory that is synched to a dropbox excluding the folder "Internal"
+## Example
+
+Here is an example of a source directory that is synched to a dropbox excluding the folder "Internal"
 
 ![Help](misc/help.png)
