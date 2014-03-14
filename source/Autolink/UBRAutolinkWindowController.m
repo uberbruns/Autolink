@@ -205,7 +205,7 @@
 
 
 
-- (BOOL)clearTargetFolder:(NSURL *)targetFolder {
+- (void)clearTargetFolder:(NSURL *)targetFolder {
 
     NSFileManager * fm = [NSFileManager defaultManager];
     NSDirectoryEnumerator * dirEnumerator = [fm enumeratorAtURL:targetFolder
@@ -224,8 +224,6 @@
             }
         }
     }
-    
-    return TRUE;
     
 }
 
