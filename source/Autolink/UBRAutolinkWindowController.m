@@ -108,8 +108,9 @@
     [self clearTargetFolder:self.targetFolder];
     [self syncSourceFolder:self.sourceFolder withTargetFolder:self.targetFolder];
 
+    [self performSelector:@selector(dismissProgressWindow:) withObject:nil afterDelay:0.25];
     [self performSelector:@selector(showProgress:) withObject:[NSNumber numberWithBool:FALSE] afterDelay:0.5];
-
+    
 }
 
 
@@ -131,7 +132,6 @@
         [self.progressBar setIndeterminate:FALSE];
         [self.doneButton setTitle:@"Done"];
         [self.doneButton setEnabled:TRUE];
-        [self.window endSheet:self.progressWindow];
 
     }
 
