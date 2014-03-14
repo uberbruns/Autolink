@@ -7,15 +7,31 @@
 //
 
 #import "UBRAutolinkWindowController.h"
+#import "UBRAutolinkEngine.h"
 
 @interface UBRAutolinkWindowController ()
 
 @property (nonatomic, copy) NSURL * sourceFolder;
 @property (nonatomic, copy) NSURL * targetFolder;
+@property (nonatomic, strong) UBRAutolinkEngine * autolinkEngine;
 
 @end
 
+
+
 @implementation UBRAutolinkWindowController
+
+#pragma mark - Life Cycle -
+
+- (id)initWithWindowNibName:(NSString *)windowNibName {
+
+    self = [super initWithWindowNibName:windowNibName];
+    if (self) {
+        self.autolinkEngine = [[UBRAutolinkEngine alloc] init];
+    }
+    return self;
+
+}
 
 
 #pragma mark - Actions -
@@ -75,8 +91,8 @@
     [self.window beginSheet:self.progressWindow completionHandler:nil];
     
     // Start Syncing
-    [self clearTargetFolder:self.targetFolder];
-    [self syncSourceFolder:self.sourceFolder withTargetFolder:self.targetFolder];
+    [self.autolinkEngine clearTargetFolder:self.targetFolder];
+    [self.autolinkEngine syncSourceFolder:self.sourceFolder withTargetFolder:self.targetFolder];
     
     // Close Progress Window  (We show it at least 0.25 sec)
     [self performSelector:@selector(dismissProgressWindow:) withObject:nil afterDelay:0.25];
@@ -120,7 +136,7 @@
 }
 
 
-#pragma mark UI
+#pragma mark User Interface Updates
 
 - (void)showProgress:(BOOL)show {
     
@@ -141,84 +157,6 @@
 }
 
 
-
-#pragma mark - Core Functionality -
-
-- (void)syncSourceFolder:(NSURL *)sourceFolderURL withTargetFolder:(NSURL *)targetFolderURL {
-    
-    NSFileManager * fm = [NSFileManager defaultManager];
-    NSArray * sourceFolderComp = [sourceFolderURL pathComponents];
-    NSDirectoryEnumerator * dirEnumerator = [fm enumeratorAtURL:sourceFolderURL
-                                     includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
-                                                        options:NSDirectoryEnumerationSkipsPackageDescendants
-                                                   errorHandler:nil];
-    
-    
-    // Iterate Over Source Files
-    for (NSURL * fileURL in dirEnumerator) {
-        
-        // Create Link Token Found
-        BOOL createLink = [[fileURL lastPathComponent] isEqualToString:@".createlink"];
-        if (createLink) {
-            
-            NSError * error;
-            NSUInteger srcCount = sourceFolderComp.count;
-            NSUInteger thisCount = fileURL.pathComponents.count;
-            NSArray * thisFolderComp = [fileURL.pathComponents subarrayWithRange:NSMakeRange(srcCount, thisCount-srcCount-2)];
-            
-            // Create New Target Folder
-            NSArray * newFolderComp = [targetFolderURL.pathComponents arrayByAddingObjectsFromArray:thisFolderComp];
-            NSURL * newFolderURL = [NSURL fileURLWithPathComponents:newFolderComp];
-            [fm createDirectoryAtURL:newFolderURL withIntermediateDirectories:TRUE attributes:nil error:&error];
-            if (error) {
-                NSLog(@"Autolink could not create folder: %@", newFolderURL);
-            }
-
-            // Create Symlink
-            NSString * symlink = fileURL.pathComponents[thisCount-2];
-            NSURL * symLinkURL = [newFolderURL URLByAppendingPathComponent:symlink];
-            NSURL * destionationURL = [fileURL URLByDeletingLastPathComponent];
-            
-            if (![fm fileExistsAtPath:symLinkURL.path]) {
-                [fm createSymbolicLinkAtURL:symLinkURL withDestinationURL:destionationURL error:&error];
-                if (error) {
-                    NSLog(@"Autolink could not create symlink: %@", symLinkURL);
-                }
-            }
-            
-            
-        }
-        
-    }
-    
-}
-
-
-
-- (void)clearTargetFolder:(NSURL *)targetFolder {
-
-    NSFileManager * fm = [NSFileManager defaultManager];
-    NSDirectoryEnumerator * dirEnumerator = [fm enumeratorAtURL:targetFolder
-                                     includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey, NSURLIsSymbolicLinkKey]
-                                                        options:NSDirectoryEnumerationSkipsPackageDescendants
-                                                   errorHandler:nil];
-
-    for (NSURL * fileURL in dirEnumerator.allObjects.reverseObjectEnumerator) {
-        NSDictionary * attr = [fm attributesOfItemAtPath:fileURL.path error:nil];
-        
-        if (attr[NSFileType] == NSFileTypeSymbolicLink) {
-            // Delete Symlinks
-            [fm removeItemAtURL:fileURL error:nil];
-        } else if (attr[NSFileType] == NSFileTypeDirectory) {
-            // Delete Empty Folders
-            NSArray * content = [fm contentsOfDirectoryAtPath:fileURL.path error:nil];
-            if (content && content.count == 0) {
-                [fm removeItemAtURL:fileURL error:nil];
-            }
-        }
-    }
-    
-}
 
 
 

@@ -20,6 +20,7 @@
 		2A058BE918D1BD52007C2FA1 /* AutolinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A058BE818D1BD52007C2FA1 /* AutolinkTests.m */; };
 		2A058BF518D1CA62007C2FA1 /* UBRAutolinkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A058BF318D1CA62007C2FA1 /* UBRAutolinkWindowController.m */; };
 		2A058BF618D1CA62007C2FA1 /* UBRAutolinkWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A058BF418D1CA62007C2FA1 /* UBRAutolinkWindowController.xib */; };
+		2A39118E18D31118003A1069 /* UBRAutolinkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A39118D18D31118003A1069 /* UBRAutolinkEngine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		2A058BF218D1CA62007C2FA1 /* UBRAutolinkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRAutolinkWindowController.h; sourceTree = "<group>"; };
 		2A058BF318D1CA62007C2FA1 /* UBRAutolinkWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRAutolinkWindowController.m; sourceTree = "<group>"; };
 		2A058BF418D1CA62007C2FA1 /* UBRAutolinkWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UBRAutolinkWindowController.xib; sourceTree = "<group>"; };
+		2A39118C18D31118003A1069 /* UBRAutolinkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRAutolinkEngine.h; sourceTree = "<group>"; };
+		2A39118D18D31118003A1069 /* UBRAutolinkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRAutolinkEngine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				2A058BC518D1BD52007C2FA1 /* Supporting Files */,
 				2A058BF218D1CA62007C2FA1 /* UBRAutolinkWindowController.h */,
 				2A058BF318D1CA62007C2FA1 /* UBRAutolinkWindowController.m */,
+				2A39118C18D31118003A1069 /* UBRAutolinkEngine.h */,
+				2A39118D18D31118003A1069 /* UBRAutolinkEngine.m */,
 				2A058BF418D1CA62007C2FA1 /* UBRAutolinkWindowController.xib */,
 			);
 			path = Autolink;
@@ -262,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A39118E18D31118003A1069 /* UBRAutolinkEngine.m in Sources */,
 				2A058BF518D1CA62007C2FA1 /* UBRAutolinkWindowController.m in Sources */,
 				2A058BD218D1BD52007C2FA1 /* UBRAppDelegate.m in Sources */,
 				2A058BCB18D1BD52007C2FA1 /* main.m in Sources */,
@@ -477,6 +483,7 @@
 				2A058BEE18D1BD52007C2FA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A058BEF18D1BD52007C2FA1 /* Build configuration list for PBXNativeTarget "AutolinkTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +492,7 @@
 				2A058BF118D1BD52007C2FA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
