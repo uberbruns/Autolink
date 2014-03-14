@@ -44,7 +44,7 @@
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JUY-Ge-6MD">
                                     <rect key="frame" x="18" y="15" width="376" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="To control the symlink robot place a file named &quot;.createlink&quot; in any subdirectory of the source folder." id="rJk-Oz-rNj">
+                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="To control the symlink robot place files named &quot;.createlink&quot; in any subdirectory of your source folder." id="rJk-Oz-rNj">
                                         <font key="font" size="12" name="HelveticaNeue"/>
                                         <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
