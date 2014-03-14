@@ -12,6 +12,8 @@ The app will scan for those files and accordingly creates a structure of folders
 
 ## Example
 
-Here is an example of a source directory that is synched to a dropbox excluding the folder "Internal"
+Here is an example of a source directory that is mirrored into a dropbox excluding the folder "Internal".
+
+Left: Source Folder, Right: Target Folder
 
 ![Help](misc/help.png)
