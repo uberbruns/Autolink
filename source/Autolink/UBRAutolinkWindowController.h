@@ -21,6 +21,7 @@
 @property (strong) IBOutlet NSWindow *progressWindow;
 @property (weak) IBOutlet NSProgressIndicator *progressBar;
 @property (weak) IBOutlet NSButton *doneButton;
+@property (assign) BOOL userHasBackups;
 
 
 @end

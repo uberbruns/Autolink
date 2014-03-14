@@ -131,6 +131,7 @@
         [self.progressBar setIndeterminate:FALSE];
         [self.doneButton setTitle:@"Done"];
         [self.doneButton setEnabled:TRUE];
+        [self.window endSheet:self.progressWindow];
 
     }
 
@@ -154,66 +155,50 @@
 
 
 
-- (void)syncSourceFolder:(NSURL *)currentSourceFolder withTargetFolder:(NSURL *)currentTargetFolder {
+
+- (void)syncSourceFolder:(NSURL *)sourceFolderURL withTargetFolder:(NSURL *)targetFolderURL {
     
     NSFileManager * fm = [NSFileManager defaultManager];
-    
-    NSDirectoryEnumerator * dirEnumerator = [fm enumeratorAtURL:currentSourceFolder
+    NSArray * sourceFolderComp = [sourceFolderURL pathComponents];
+    NSDirectoryEnumerator * dirEnumerator = [fm enumeratorAtURL:sourceFolderURL
                                      includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
-                                                        options:NSDirectoryEnumerationSkipsPackageDescendants |
-                                             NSDirectoryEnumerationSkipsSubdirectoryDescendants
+                                                        options:NSDirectoryEnumerationSkipsPackageDescendants
                                                    errorHandler:nil];
+    
     
     for (NSURL * fileURL in dirEnumerator) {
         
-        BOOL hasCreateFolderToken, hasCreateLinkToken;
-        hasCreateFolderToken = [fm fileExistsAtPath: [[fileURL URLByAppendingPathComponent:@".createfolder" isDirectory:0] path]];
-        hasCreateLinkToken = [fm fileExistsAtPath: [[fileURL URLByAppendingPathComponent:@".createlink" isDirectory:0] path]];
-
-        if (hasCreateFolderToken) {
-            NSURL * newFolder = [self createFolder:fileURL.lastPathComponent atTargetURL:currentTargetFolder];
-            if (newFolder) {
-                [self syncSourceFolder:fileURL withTargetFolder:newFolder];
+        BOOL createLink = [[fileURL lastPathComponent] isEqualToString:@".createlink"];
+        if (createLink) {
+            
+            NSError * error;
+            NSUInteger srcCount = sourceFolderComp.count;
+            NSUInteger thisCount = fileURL.pathComponents.count;
+            NSArray * thisFolderComp = [fileURL.pathComponents subarrayWithRange:NSMakeRange(srcCount, thisCount-srcCount-2)];
+            
+            // Create New Target Folder
+            NSArray * newFolderComp = [targetFolderURL.pathComponents arrayByAddingObjectsFromArray:thisFolderComp];
+            NSURL * newFolderURL = [NSURL fileURLWithPathComponents:newFolderComp];
+            [fm createDirectoryAtURL:newFolderURL withIntermediateDirectories:TRUE attributes:nil error:&error];
+            if (error) {
+                NSLog(@"Autolink could not create folder: %@", newFolderURL);
             }
-        } else if (hasCreateLinkToken) {
-            [self createLink:fileURL.lastPathComponent atTargetURL:currentTargetFolder destination:fileURL];
+
+            // Create Symlink
+            NSString * symlink = fileURL.pathComponents[thisCount-2];
+            NSURL * symLinkURL = [newFolderURL URLByAppendingPathComponent:symlink];
+            NSURL * destionationURL = [fileURL URLByDeletingLastPathComponent];
+            
+            if (![fm fileExistsAtPath:symLinkURL.path]) {
+                [fm createSymbolicLinkAtURL:symLinkURL withDestinationURL:destionationURL error:&error];
+                if (error) {
+                    NSLog(@"Autolink could not create symlink: %@", symLinkURL);
+                }
+            }
+            
+            
         }
         
-    }
-
-}
-
-
-- (NSURL *)createFolder:(NSString *)name atTargetURL:(NSURL *)targetFolder {
-
-    NSFileManager * fm = [NSFileManager defaultManager];
-    NSURL * newFolder = [targetFolder URLByAppendingPathComponent:name isDirectory:TRUE];
-    NSError * error;
-    
-    [fm createDirectoryAtURL:newFolder withIntermediateDirectories:TRUE attributes:nil error:&error];
-    
-    if (!error) {
-        return newFolder;
-    } else {
-        return nil;
-    }
-
-}
-
-
-
-- (NSURL *)createLink:(NSString *)name atTargetURL:(NSURL *)targetFolder destination:(NSURL *)destination {
-    
-    NSFileManager * fm = [NSFileManager defaultManager];
-    NSURL * symLinkURL = [targetFolder URLByAppendingPathComponent:name isDirectory:TRUE];
-    NSError * error;
-    
-    [fm createSymbolicLinkAtURL:symLinkURL withDestinationURL:destination error:&error];
-    
-    if (!error) {
-        return symLinkURL;
-    } else {
-        return nil;
     }
     
 }
@@ -231,6 +216,7 @@
     for (NSURL * fileURL in dirEnumerator.allObjects.reverseObjectEnumerator) {
         NSDictionary * attr = [fm attributesOfItemAtPath:fileURL.path error:nil];
         if (attr[NSFileType] == NSFileTypeSymbolicLink) {
+            [fm removeItemAtURL:fileURL error:nil];
         } else if (attr[NSFileType] == NSFileTypeDirectory) {
             NSArray * content = [fm contentsOfDirectoryAtPath:fileURL.path error:nil];
             if (content && content.count == 0) {

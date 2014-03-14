@@ -7,11 +7,8 @@ An OS X Utility App to selectively mirror a file structure via symlinks and fold
 
 ## Usage
 
-You can only mirror folders. Files have to be in a folder you mirror via a symlink. If you want to create a folder at the target destination or an symbolic link is controlled with the hidden files `.createfolder` and `.createlink`.
-
-Why mirroring folders? You use folders to give the target folder more structure, because once you symlinked a folder there is no way to selectively sync inside this folder anymore.
-
-If you choose to create a folder all direct subfolders will be scanned for hidden files so those subfolders can end up in the target folder as symlinks or folders to.
+Select a source and a target folder. Than place hidden files named ".createlink" in any subdirectory of the source folder.
+The app will scan for those files and accordingly creates a structure of folders and symlinks.
 
 ## Example
 

@@ -44,7 +44,7 @@
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JUY-Ge-6MD">
                                     <rect key="frame" x="18" y="15" width="376" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="To control the symlink robot place files named &quot;.createfolder&quot; or &quot;.createlink&quot; in the subdirectories of the source folder." id="rJk-Oz-rNj">
+                                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="To control the symlink robot place a file named &quot;.createlink&quot; in any subdirectory of the source folder." id="rJk-Oz-rNj">
                                         <font key="font" size="12" name="HelveticaNeue"/>
                                         <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -81,8 +81,8 @@
                         <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                         <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </box>
-                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gQ9-BA-vxa">
-                        <rect key="frame" x="20" y="124" width="264" height="22"/>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gQ9-BA-vxa">
+                        <rect key="frame" x="20" y="124" width="263" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="ULQ-dZ-Fue"/>
@@ -100,8 +100,8 @@
                             </binding>
                         </connections>
                     </textField>
-                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JYq-s0-c9P">
-                        <rect key="frame" x="20" y="82" width="264" height="22"/>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JYq-s0-c9P">
+                        <rect key="frame" x="20" y="82" width="263" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="nUU-Xp-e8h"/>
@@ -119,8 +119,8 @@
                             </binding>
                         </connections>
                     </textField>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN2-Pr-kFq">
-                        <rect key="frame" x="294" y="118" width="139" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JN2-Pr-kFq">
+                        <rect key="frame" x="293" y="118" width="140" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="oAW-zh-s11"/>
@@ -133,8 +133,8 @@
                             <action selector="selectSourceFolder:" target="-2" id="xus-97-gxd"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25c-98-Bzm">
-                        <rect key="frame" x="294" y="76" width="139" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="25c-98-Bzm">
+                        <rect key="frame" x="293" y="76" width="140" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="88C-Hu-R6a"/>
@@ -147,13 +147,13 @@
                             <action selector="selectTargetFolder:" target="-2" id="R6e-29-cJO"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAZ-fW-qpB">
-                        <rect key="frame" x="294" y="13" width="139" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vAZ-fW-qpB">
+                        <rect key="frame" x="293" y="13" width="140" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Yes-sl-P1r"/>
                         </constraints>
-                        <buttonCell key="cell" type="push" title="Mirror Folders" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MND-3p-Ctg">
+                        <buttonCell key="cell" type="push" title="Create Symlinks" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MND-3p-Ctg">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -162,6 +162,7 @@ DQ
                         </buttonCell>
                         <connections>
                             <action selector="createTargetStructure:" target="-2" id="axQ-Sm-YmQ"/>
+                            <binding destination="-2" name="enabled" keyPath="userHasBackups" id="KXx-Sq-5yc"/>
                         </connections>
                     </button>
                     <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="xea-OL-KVt">
@@ -177,6 +178,20 @@ DQ
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                     </box>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="fBw-L4-KCv">
+                        <rect key="frame" x="18" y="22" width="148" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="i1p-uF-gBi"/>
+                        </constraints>
+                        <buttonCell key="cell" type="check" title="Yes, I have Backups." bezelStyle="regularSquare" imagePosition="left" inset="2" id="Dqu-Gp-FwX">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="userHasBackups" id="8md-5c-Uos"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="JN2-Pr-kFq" firstAttribute="leading" secondItem="gQ9-BA-vxa" secondAttribute="trailing" constant="16" id="3Px-7A-tWx"/>
@@ -196,6 +211,8 @@ DQ
                     <constraint firstAttribute="bottom" secondItem="vAZ-fW-qpB" secondAttribute="bottom" constant="20" id="dvh-bI-3Nq"/>
                     <constraint firstItem="vAZ-fW-qpB" firstAttribute="top" secondItem="xea-OL-KVt" secondAttribute="bottom" constant="20" id="hDw-cC-dpC"/>
                     <constraint firstAttribute="trailing" secondItem="JN2-Pr-kFq" secondAttribute="trailing" constant="20" symbolic="YES" id="hV6-wc-4eK"/>
+                    <constraint firstItem="vAZ-fW-qpB" firstAttribute="baseline" secondItem="fBw-L4-KCv" secondAttribute="baseline" id="pNL-pl-2Nq"/>
+                    <constraint firstItem="fBw-L4-KCv" firstAttribute="leading" secondItem="xFg-tM-el3" secondAttribute="leading" constant="20" id="rOu-kS-35b"/>
                     <constraint firstItem="mEf-Zz-RBU" firstAttribute="leading" secondItem="xFg-tM-el3" secondAttribute="leading" constant="-4" id="rlL-mh-dms"/>
                     <constraint firstItem="25c-98-Bzm" firstAttribute="leading" secondItem="JYq-s0-c9P" secondAttribute="trailing" constant="16" id="tEp-dS-5JN"/>
                     <constraint firstItem="vAZ-fW-qpB" firstAttribute="width" secondItem="25c-98-Bzm" secondAttribute="width" id="xst-n5-ciT"/>
