@@ -17,3 +17,9 @@ Here is an example of a source directory that is mirrored into a dropbox excludi
 Left: Source Folder, Right: Target Folder
 
 ![Help](misc/help.png)
+
+## Download
+
+You can download an unsigned binary of this app here: http://downloads.bruns.me/apps/autolink-latest.zip
+
+To open this version you need to rightclick the app and click "Open" or change the Gate Keeper settings in system preferences.
